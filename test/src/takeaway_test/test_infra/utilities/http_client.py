@@ -3,7 +3,7 @@ import json
 
 import requests
 
-from test.src.takeaway_test.infra.expections.http_exception import HttpException
+from test.src.takeaway_test.test_infra.expections.http_exception import HttpException
 
 HTTP_REQUEST_TIMEOUT = 120
 
