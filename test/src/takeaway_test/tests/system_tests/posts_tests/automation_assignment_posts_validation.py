@@ -19,7 +19,7 @@ class TestAutomationAssignmentPostsValidation(BasePostsAutomationAssignmentTest)
         # validate post details
         self.validate_post_details(fetched_post_by_id, new_post)
         # update random post name from posts list
-        random_post = get_rand_number_between_zero_to_max_number(len(posts_list) - 1, 0)
+        random_post = posts_list[get_rand_number_between_zero_to_max_number(len(posts_list) - 1, 0)]
         random_post.title = "new title"
         self.update_post(post_id=random_post.id, post_data=random_post)
         # get post by id and validate it's updated

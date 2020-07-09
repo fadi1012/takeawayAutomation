@@ -14,3 +14,6 @@ main entities which were tests are :
 test plan can be found in the following google doc:
 https://docs.google.com/document/d/1eXLlVAycFzxfh4Xi__gew6ZXGtkqzsVZ_13Bj1CzYgg/edit
 
+
+unresolved issues:
+creating a new post/user/comment/album is not adding to the list although i am getting a success

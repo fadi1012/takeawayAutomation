@@ -25,7 +25,7 @@ class TestAutomationAssignmentCommentsValidation(BaseCommentsAutomationAssignmen
         random_comment.name = "new comment name"
         self.update_comment(comment_id=random_comment.id, comment_data=random_comment)
         # get comment by id and validate it's updated
-        comment = self.get_comment_by_id(comment_id=random_comment.id)
+        comment = comments_list[self.get_comment_by_id(comment_id=random_comment.id)]
         assert comment.name == "new comment name"
         # delete comment
         self.delete_comment(comment_id=comment.id)

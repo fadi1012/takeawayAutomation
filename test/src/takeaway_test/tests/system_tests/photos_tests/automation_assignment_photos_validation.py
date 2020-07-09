@@ -20,7 +20,7 @@ class TestAutomationAssignmentPostsValidation(BasePhotosAutomationAssignmentTest
         # validate new_photo details
         self.validate_photo_details(fetched_new_photo_by_id, new_photo)
         # update random photo title from photos list
-        random_photo = get_rand_number_between_zero_to_max_number(len(photos_list) - 1, 0)
+        random_photo = photos_list[get_rand_number_between_zero_to_max_number(len(photos_list) - 1, 0)]
         random_photo.title = "new photo title"
         self.update_photo(photo_id=random_photo.id, photo_data=random_photo)
         # get photo  by id and validate it's updated

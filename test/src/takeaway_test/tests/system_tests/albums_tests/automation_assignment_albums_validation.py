@@ -20,7 +20,7 @@ class TestAutomationAssignmentAlbumsValidation(BaseAlbumsAutomationAssignmentTes
         # validate album details
         self.validate_album_details(fetched_album_by_id, new_album)
         # update random album title from albums list
-        random_album = get_rand_number_between_zero_to_max_number(len(albums_list) - 1, 0)
+        random_album = albums_list[get_rand_number_between_zero_to_max_number(len(albums_list) - 1, 0)]
         random_album.title = "new album title"
         self.update_album(album_id=random_album.title, album_data=random_album)
         # get album by id and validate it's updated

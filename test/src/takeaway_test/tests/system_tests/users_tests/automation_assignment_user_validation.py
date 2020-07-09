@@ -22,12 +22,12 @@ class TestAutomationAssignmentUserValidation(BaseUserAutomationAssignmentTest):
         self.validate_user_details(fetched_user, new_user)
         # validate user details
         # update random user name from users list
-        random_user = get_rand_number_between_zero_to_max_number(len(users_list) - 1, 0)
+        random_user = users_list[get_rand_number_between_zero_to_max_number(len(users_list) - 1, 0)]
         random_user.first_name = "new_name"
         self.update_user(user_id=random_user.id, user_data=random_user)
         # get user by id and validate it's updated
         user = self.get_user_by_id(user_id=random_user.id)
-        assert user.name == "new_name"
+        assert user.first_name == "new_name"
         # delete user
         self.delete_user(user_id=new_user.id)
         updated_list = self.get_list_of_users()
