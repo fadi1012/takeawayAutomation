@@ -19,7 +19,7 @@ class ApiClient:
         return UserLink(self_link=params['self']['href'], edit=params['edit']['href'], avatar=params['avatar']['href'] if 'avatar' in params else None)
 
     def __generate_user(self, params):
-        return User(id=params['id'],
+        return User(id=int(params['id']),
                     first_name=params['first_name'],
                     last_name=params['last_name'], gender=params['gender'],
                     dob=params['dob'], email=params['email'], phone=params['phone'], website=params['website'],

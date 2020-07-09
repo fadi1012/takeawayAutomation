@@ -12,12 +12,13 @@ class TestAutomationAssignmentUserValidation(BaseUserAutomationAssignmentTest):
         users_list = self.get_list_of_users()
         assert len(users_list) > 1
         # create new user
-        new_user = self.create_new_user(id=len(users_list) + 1)
+        new_user = self.create_new_user(id=int(users_list[-1].id) + 1)
         updated_list = self.get_list_of_users()
         # validate user list is updated
+        # TODO this validation is failing, i am getting a success in adding the user but when fetching again for the users it's not there
         assert len(updated_list) > len(users_list)
         # get specific user
-        fetched_user = self.get_user_by_first_name(new_user.first_name)
+        fetched_user = self.get_user_by_id(new_user.id)
         self.validate_user_details(fetched_user, new_user)
         # validate user details
         # update random user name from users list

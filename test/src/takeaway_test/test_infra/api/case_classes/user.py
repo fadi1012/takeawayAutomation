@@ -22,7 +22,7 @@ class HrefLink:
 
 class UserStatus:
     ACTIVE = "active"
-    INACTIVE = "inative"
+    INACTIVE = "inactive"
     IN_A_MEETING = "in_a_meeting"
 
 
@@ -53,6 +53,6 @@ class User:
     def generate_default_user_details(id, links=None):
         links = links or UserLink(self_link="https://gorest.co.in/public-api/users/" + str(id), edit="https://gorest.co.in/public-api/users/" + str(id),
                                   avatar="https://gorest.co.in/public-api/users/" + str(id))
-        return User(id=id, first_name="fadi" + str(get_rand_number_between_zero_to_max_number(100, 1)), last_name="zaboura", gender="male", dob="1992-12-10", email="fadi1012zaboura@gmail.com",
-                    website="test.com", address="test-address",
-                    status=UserStatus.ACTIVE, _links=links, phone=get_random_valid_phone_number())
+        return User(id=id, first_name="fadi" + str(get_rand_number_between_zero_to_max_number(100, 1)), last_name="zaboura", gender="male", dob="1992-04-09", email="casper@example.net",
+                    website="https://fritsch.com/id-recusandae-ad-quidem-reprehenderit-qui-dolores.html", address="32712 Sporer Inlet\nRashawnland, CA 81497-0682",
+                    status=UserStatus.INACTIVE, _links=links, phone=int(get_random_valid_phone_number()))
