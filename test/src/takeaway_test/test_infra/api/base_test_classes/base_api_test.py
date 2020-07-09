@@ -1,2 +1,8 @@
+from test.src.takeaway_test.test_infra.api.api_client import ApiClient
+
+
 class BaseApiTest:
-    pass
+    api_client = None
+
+    def init_all_test_variables(self):
+        self.api_client = ApiClient()

@@ -1,2 +1,0 @@
-class BaseAutomationAssignment(BaseApiTest):
-    pass

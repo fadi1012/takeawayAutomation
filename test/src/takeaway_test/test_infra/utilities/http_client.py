@@ -50,6 +50,8 @@ class HttpClient:
 
     def get(self, url, params={}, headers={}, cookies={}, return_resp_data=True):
         req = dict(url=url, method='GET', params=params, headers=headers, cookies=cookies)
+        if 'Content-Type' not in headers:
+            headers['Content-Type'] = 'application/json;charset=UTF-8'
         if return_resp_data:
             return self.send_request(req).resp_data
         return self.send_request(req)
