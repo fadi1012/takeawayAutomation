@@ -10,7 +10,7 @@ class BaseCommentsAutomationAssignmentTest(BaseApiTest):
 
     def create_new_comment(self, id, comment_data=None):
         new_comment_data = comment_data or Comment.generate_default_comment_details(id=id)
-        self.api_client.create_new_comment(post_data=new_comment_data)
+        self.api_client.create_new_comment(comment_data=new_comment_data)
         return new_comment_data
 
     def get_comment_by_id(self, comment_id):

@@ -16,7 +16,7 @@ class ApiClient:
     # +++++++++++++++++++++++++++++++++ private generation methods +++++++++++++++++++++++++++++#
 
     def __generate_user_links(self, params):
-        return UserLink(self_link=params['self']['href'], edit=params['edit']['href'], avatar=params['avatar']['href'])
+        return UserLink(self_link=params['self']['href'], edit=params['edit']['href'], avatar=params['avatar']['href'] if 'avatar' in params else None)
 
     def __generate_user(self, params):
         return User(id=params['id'],
