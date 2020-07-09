@@ -1,8 +1,8 @@
 from test.src.takeaway_test.test_infra.api.base_test_classes.base_api_test import BaseApiTest
 from test.src.takeaway_test.test_infra.api.case_classes.photo import Photo
-from test.src.takeaway_test.test_infra.api.case_classes.post import Post
 
-# this class contains shared method that photo tests can use
+
+# this class contains shared methods that photo tests can use
 class BasePhotosAutomationAssignmentTest(BaseApiTest):
 
     def get_all_photos(self):

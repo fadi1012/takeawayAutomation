@@ -1,34 +1,33 @@
 import pytest
 
-from test.src.takeaway_test.test_infra.api.base_test_classes.comments.base_comments_automation_assignment_test import BaseCommentsAutomationAssignmentTest
-from test.src.takeaway_test.test_infra.api.base_test_classes.posts.base_posts_automation_assignment_test import BasePostsAutomationAssignmentTest
+from test.src.takeaway_test.test_infra.api.base_test_classes.albums.base_albums_automation_assignment_test import BaseAlbumsAutomationAssignmentTest
 from test.src.takeaway_test.test_infra.helper.helper import get_rand_number_between_zero_to_max_number
 
 
 @pytest.mark.automation_assignment
-class TestAutomationAssignmentCommentsValidation(BaseCommentsAutomationAssignmentTest):
-    def test_comments_automation_assignment(self):
+class TestAutomationAssignmentAlbumsValidation(BaseAlbumsAutomationAssignmentTest):
+    def test_albums_automation_assignment(self):
         self.init_all_test_variables()
-        comments_list = self.get_all_comments()
-        assert len(comments_list) > 1
-        # add new comment
-        new_comment = self.create_new_comment(id=len(comments_list) + 1)
-        updated_comments_list = self.get_all_comments()
-        # validate comments list is updated
-        assert len(updated_comments_list) > len(comments_list)
-        # get specific comment by id
-        fetched_comment_by_id = self.get_comment_by_id(new_comment.id)
-        # validate comment details
-        self.validate_comment_details(fetched_comment_by_id, new_comment)
-        # update random comment name from users list
-        random_comment = get_rand_number_between_zero_to_max_number(len(comments_list) - 1, 0)
-        random_comment.name = "new comment name"
-        self.update_comment(comment_id=random_comment.id, comment_data=random_comment)
-        # get comment by id and validate it's updated
-        comment = self.get_comment_by_id(comment_id=random_comment.id)
-        assert comment.name == "new comment name"
-        # delete comment
-        self.delete_comment(comment_id=comment.id)
-        updated_comments_list = self.get_all_comments()
-        # validate that number of comments is back to the original before the new addition
-        assert len(updated_comments_list) == len(comments_list)
+        albums_list = self.get_all_albums()
+        assert len(albums_list) > 1
+        # add new album
+        new_album = self.create_new_album(id=len(albums_list) + 1)
+        updated_albums_list = self.get_all_albums()
+        # validate albums list is updated
+        assert len(updated_albums_list) > len(albums_list)
+        # get specific album by id
+        fetched_album_by_id = self.get_album_by_id(new_album.id)
+        # validate album details
+        self.validate_album_details(fetched_album_by_id, new_album)
+        # update random album title from albums list
+        random_album = get_rand_number_between_zero_to_max_number(len(albums_list) - 1, 0)
+        random_album.title = "new album title"
+        self.update_album(album_id=random_album.title, album_data=random_album)
+        # get album by id and validate it's updated
+        album = self.get_album_by_id(album_id=random_album.id)
+        assert album.title == "new album title"
+        # delete album
+        self.delete_album(album_id=album.id)
+        updated_albums_list = self.get_all_albums()
+        # validate that number of album is back to the original before the new addition
+        assert len(updated_albums_list) == len(albums_list)

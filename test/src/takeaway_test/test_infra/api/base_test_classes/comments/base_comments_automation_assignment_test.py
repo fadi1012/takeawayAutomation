@@ -1,9 +1,8 @@
 from test.src.takeaway_test.test_infra.api.base_test_classes.base_api_test import BaseApiTest
 from test.src.takeaway_test.test_infra.api.case_classes.comment import Comment
-from test.src.takeaway_test.test_infra.api.case_classes.post import Post
 
 
-# this class contains shared method that comments tests can use
+# this class contains shared methods that comments tests can use
 class BaseCommentsAutomationAssignmentTest(BaseApiTest):
 
     def get_all_comments(self):

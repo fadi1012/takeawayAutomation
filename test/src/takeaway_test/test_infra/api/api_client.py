@@ -1,3 +1,4 @@
+from test.src.takeaway_test.test_infra.api.case_classes.album import Album
 from test.src.takeaway_test.test_infra.api.case_classes.comment import Comment
 from test.src.takeaway_test.test_infra.api.case_classes.photo import Photo
 from test.src.takeaway_test.test_infra.api.case_classes.post import Post
@@ -38,13 +39,18 @@ class ApiClient:
 
     # _____________________________________________________________________________________________________________________________
 
-    def __generate_comments(self, params):
+    def __generate_comment(self, params):
         return Comment(id=params['id'],
                        post_id=params['post_id'],
                        body=params['body'], name=params['name'], email=params['email'], _links=self.__generate_user_links(params['_links']))
 
     # _____________________________________________________________________________________________________________________________
+    def __generate_album(self, params):
+        return Album(id=params['id'],
+                     user_id=params['post_id'],
+                     title=params['body'], _links=self.__generate_user_links(params['_links']))
 
+    # _____________________________________________________________________________________________________________________________
     def get_list_of_users(self):
         resp = self.__http_client.get(url=config.USERS,
                                       params=self.token)
@@ -92,7 +98,7 @@ class ApiClient:
 
     def get_post_by_id(self, user_id):
         resp = self.__http_client.get(url=config.POST_BY_ID.format(user_id), params=self.token)
-        return self.__generate_user(resp['result'])
+        return self.__generate_post(resp['result'])
 
         # _____________________________________________________________________________________________________________________________
 
@@ -119,7 +125,7 @@ class ApiClient:
 
     def get_photo_by_id(self, photo_id):
         resp = self.__http_client.get(url=config.PHOTO_BY_ID.format(photo_id), params=self.token)
-        return self.__generate_user(resp['result'])
+        return self.__generate_photo(resp['result'])
 
         # _____________________________________________________________________________________________________________________________
 
@@ -137,7 +143,8 @@ class ApiClient:
     def get_all_comments(self):
         resp = self.__http_client.get(url=config.COMMENTS,
                                       params=self.token)
-        return [self.__generate_comments(item) for item in resp['result']]
+        return [self.__generate_comment(item) for item in resp['result']]
+        # _____________________________________________________________________________________________________________________________
 
     def create_new_comment(self, comment_data):
         return self.__http_client.post(url=config.COMMENTS, data=comment_data.to_dict(),
@@ -146,7 +153,7 @@ class ApiClient:
 
     def get_comment_by_id(self, comment_id):
         resp = self.__http_client.get(url=config.COMMENT_BY_ID.format(comment_id), params=self.token)
-        return self.__generate_user(resp['result'])
+        return self.__generate_comment(resp['result'])
 
         # _____________________________________________________________________________________________________________________________
 
@@ -157,4 +164,31 @@ class ApiClient:
 
     def delete_comment(self, comment_id):
         return self.__http_client.delete(url=config.COMMENT_BY_ID.format(comment_id),
+                                         params=self.token)
+
+        # _________________________________________ ALBUMS API CALLS SECTION __________________________________________
+
+    def get_all_albums(self):
+        resp = self.__http_client.get(url=config.ALBUMS,
+                                      params=self.token)
+        return [self.__generate_album(item) for item in resp['result']]
+
+    def create_new_album(self, album_data):
+        return self.__http_client.post(url=config.ALBUMS, data=album_data.to_dict(),
+                                       params=self.token)
+        # _____________________________________________________________________________________________________________________________
+
+    def get_album_by_id(self, album_id):
+        resp = self.__http_client.get(url=config.ALBUM_BY_ID.format(album_id), params=self.token)
+        return self.__generate_album(resp['result'])
+
+        # _____________________________________________________________________________________________________________________________
+
+    def update_album(self, album_id, album_data):
+        return self.__http_client.post(url=config.ALBUM_BY_ID.format(album_id), data=album_data.to_dict(),
+                                       params=self.token)
+        # _____________________________________________________________________________________________________________________________
+
+    def delete_album(self, album_id):
+        return self.__http_client.delete(url=config.ALBUM_BY_ID.format(album_id),
                                          params=self.token)

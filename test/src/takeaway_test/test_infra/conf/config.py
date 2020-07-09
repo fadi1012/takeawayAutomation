@@ -14,3 +14,6 @@ PHOTO_BY_ID = PHOTOS + '/{}'
 # COMMENTS
 COMMENTS = API_PREFIX + '/comments'
 COMMENT_BY_ID = COMMENTS + '/{}'
+# ALBUMS
+ALBUMS = API_PREFIX + '/albums'
+ALBUM_BY_ID = ALBUMS + '/{}'
