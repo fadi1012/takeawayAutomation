@@ -1,0 +1,2 @@
+class BaseApiTest:
+    pass
