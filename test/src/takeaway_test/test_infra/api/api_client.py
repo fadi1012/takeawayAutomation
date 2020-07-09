@@ -1,3 +1,4 @@
+from test.src.takeaway_test.test_infra.api.case_classes.post import Post
 from test.src.takeaway_test.test_infra.api.case_classes.user import User, UserLink
 from test.src.takeaway_test.test_infra.conf import config
 from test.src.takeaway_test.test_infra.utilities.http_client import HttpClient
@@ -20,6 +21,12 @@ class ApiClient:
                     last_name=params['last_name'], gender=params['gender'],
                     dob=params['dob'], email=params['email'], phone=params['phone'], website=params['website'],
                     address=params['address'], status=params['status'], _links=self.__generate_user_links(params['_links']))
+
+    # _____________________________________________________________________________________________________________________________
+    def __generate_post(self, params):
+        return Post(id=params['id'],
+                    user_id=params['user_id'],
+                    title=params['title'], body=params['body'], _links=self.__generate_user_links(params['_links']))
 
     # _____________________________________________________________________________________________________________________________
 
@@ -51,3 +58,34 @@ class ApiClient:
     def update_user(self, user_id, user_data):
         return self.__http_client.post(url=config.USER_BY_ID.format(user_id), data=user_data.to_dict(),
                                        params=self.token)
+
+    def delete_user(self, user_id):
+        return self.__http_client.delete(url=config.USER_BY_ID.format(user_id),
+                                         params=self.token)
+
+    # _________________________________________ POSTS SECTION __________________________________________
+
+    def get_all_posts(self):
+        resp = self.__http_client.get(url=config.POSTS,
+                                      params=self.token)
+        return [self.__generate_post(item) for item in resp['result']]
+
+    def create_new_post(self, post_data):
+        return self.__http_client.post(url=config.POSTS, data=post_data.to_dict(),
+                                       params=self.token)
+        # _____________________________________________________________________________________________________________________________
+
+    def get_post_by_id(self, user_id):
+        resp = self.__http_client.get(url=config.POST_BY_ID.format(user_id), params=self.token)
+        return self.__generate_user(resp['result'])
+
+        # _____________________________________________________________________________________________________________________________
+
+    def update_post(self, post_id, post_data):
+        return self.__http_client.post(url=config.POST_BY_ID.format(post_id), data=post_data.to_dict(),
+                                       params=self.token)
+        # _____________________________________________________________________________________________________________________________
+
+    def delete_post(self, post_id):
+        return self.__http_client.delete(url=config.POST_BY_ID.format(post_id),
+                                         params=self.token)

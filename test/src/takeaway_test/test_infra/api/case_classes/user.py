@@ -49,7 +49,7 @@ class User:
                 'phone': self.phone, 'website': self.website, 'address': self.address, 'status': self.status, "_links": _links_dict}
 
     @staticmethod
-    def generate_default_user_details(id, links=None):
+    def generate_default_post_details(id, links=None):
         links = links or UserLink(self_link="https://gorest.co.in/public-api/users/1964", edit="https://gorest.co.in/public-api/users/1964",
                                   avatar="https://gorest.co.in/public-api/users/1964")
         return User(id=id, first_name="fadi" + str(get_rand_number_between_zero_to_max_number(100, 1)), last_name="zaboura", gender="male", dob="1992-12-10", email="fadi1012zaboura@gmail.com", website="test.com", address="test-address",

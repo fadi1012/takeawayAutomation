@@ -21,6 +21,9 @@ class BaseUserAutomationAssignmentTest(BaseApiTest):
     def update_user(self, user_id, user_data):
         return self.api_client.update_user(user_id, user_data)
 
+    def delete_user(self, user_id):
+        return self.api_client.delete_user(user_id)
+
     def validate_user_details(self, user1, user2):
         assert user1.id == user2.id
         assert user1.first_name == user2.first_name
