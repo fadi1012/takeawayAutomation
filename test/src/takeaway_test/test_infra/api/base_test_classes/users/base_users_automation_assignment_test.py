@@ -2,6 +2,7 @@ from test.src.takeaway_test.test_infra.api.base_test_classes.base_api_test impor
 from test.src.takeaway_test.test_infra.api.case_classes.user import User
 
 
+# this class contains shared method that user tests can use
 class BaseUserAutomationAssignmentTest(BaseApiTest):
 
     def get_list_of_users(self):

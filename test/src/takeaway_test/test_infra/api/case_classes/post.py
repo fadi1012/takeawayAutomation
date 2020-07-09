@@ -17,6 +17,6 @@ class Post:
 
     @staticmethod
     def generate_default_post_details(id, links=None):
-        links = links or UserLink(self_link="https://gorest.co.in/public-api/users/1964", edit="https://gorest.co.in/public-api/users/1964",
-                                  avatar="https://gorest.co.in/public-api/users/1964")
+        links = links or UserLink(self_link="https://gorest.co.in/public-api/posts/1964", edit="https://gorest.co.in/public-api/posts/1964",
+                                  avatar="https://gorest.co.in/public-api/posts/1964")
         return Post(id=id, user_id=str(get_rand_number_between_zero_to_max_number(100, 1)), title="post-title", body="post body etc...", _links=links)

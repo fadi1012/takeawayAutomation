@@ -14,7 +14,7 @@ class TestAutomationAssignmentUserValidation(BaseUserAutomationAssignmentTest):
         # create new user
         new_user = self.create_new_user(id=len(users_list) + 1)
         updated_list = self.get_list_of_users()
-        # validate user list updated
+        # validate user list is updated
         assert len(updated_list) > len(users_list)
         # get specific user
         fetched_user = self.get_user_by_first_name(new_user.first_name)

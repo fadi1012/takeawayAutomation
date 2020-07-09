@@ -1,7 +1,7 @@
 from test.src.takeaway_test.test_infra.api.base_test_classes.base_api_test import BaseApiTest
 from test.src.takeaway_test.test_infra.api.case_classes.post import Post
 
-
+# this class contains shared method that posts tests can use
 class BasePostsAutomationAssignmentTest(BaseApiTest):
 
     def get_all_posts(self):
@@ -21,9 +21,9 @@ class BasePostsAutomationAssignmentTest(BaseApiTest):
     def delete_post(self, post_id):
         return self.api_client.delete_post(post_id)
 
-    def validate_post_details(self, user1, user2):
-        assert user1.id == user2.id
-        assert user1.user_id == user2.user_id
-        assert user1.title == user2.title
-        assert user1.body == user2.body
-        assert user1._links == user2._links
+    def validate_post_details(self, post1, post2):
+        assert post1.id == post2.id
+        assert post1.user_id == post2.user_id
+        assert post1.title == post2.title
+        assert post1.body == post2.body
+        assert post1._links == post2._links

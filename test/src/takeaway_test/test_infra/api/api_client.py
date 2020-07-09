@@ -1,3 +1,5 @@
+from test.src.takeaway_test.test_infra.api.case_classes.comment import Comment
+from test.src.takeaway_test.test_infra.api.case_classes.photo import Photo
 from test.src.takeaway_test.test_infra.api.case_classes.post import Post
 from test.src.takeaway_test.test_infra.api.case_classes.user import User, UserLink
 from test.src.takeaway_test.test_infra.conf import config
@@ -27,6 +29,19 @@ class ApiClient:
         return Post(id=params['id'],
                     user_id=params['user_id'],
                     title=params['title'], body=params['body'], _links=self.__generate_user_links(params['_links']))
+
+    # _____________________________________________________________________________________________________________________________
+    def __generate_photo(self, params):
+        return Photo(id=params['id'],
+                     album_id=params['album_id'],
+                     title=params['title'], thumbnail=params['thumbnail'], url=params['url'], _links=self.__generate_user_links(params['_links']))
+
+    # _____________________________________________________________________________________________________________________________
+
+    def __generate_comments(self, params):
+        return Comment(id=params['id'],
+                       post_id=params['post_id'],
+                       body=params['body'], name=params['name'], email=params['email'], _links=self.__generate_user_links(params['_links']))
 
     # _____________________________________________________________________________________________________________________________
 
@@ -63,7 +78,7 @@ class ApiClient:
         return self.__http_client.delete(url=config.USER_BY_ID.format(user_id),
                                          params=self.token)
 
-    # _________________________________________ POSTS SECTION __________________________________________
+    # _________________________________________ POSTS API CALLS SECTION __________________________________________
 
     def get_all_posts(self):
         resp = self.__http_client.get(url=config.POSTS,
@@ -88,4 +103,58 @@ class ApiClient:
 
     def delete_post(self, post_id):
         return self.__http_client.delete(url=config.POST_BY_ID.format(post_id),
+                                         params=self.token)
+
+    # _________________________________________ PHOTOS API CALLS SECTION __________________________________________
+
+    def get_all_photos(self):
+        resp = self.__http_client.get(url=config.PHOTOS,
+                                      params=self.token)
+        return [self.__generate_photo(item) for item in resp['result']]
+
+    def upload_photo(self, photo_data):
+        return self.__http_client.post(url=config.PHOTOS, data=photo_data.to_dict(),
+                                       params=self.token)
+        # _____________________________________________________________________________________________________________________________
+
+    def get_photo_by_id(self, photo_id):
+        resp = self.__http_client.get(url=config.PHOTO_BY_ID.format(photo_id), params=self.token)
+        return self.__generate_user(resp['result'])
+
+        # _____________________________________________________________________________________________________________________________
+
+    def update_photo(self, photo_id, photo_data):
+        return self.__http_client.post(url=config.PHOTO_BY_ID.format(photo_id), data=photo_data.to_dict(),
+                                       params=self.token)
+        # _____________________________________________________________________________________________________________________________
+
+    def delete_photo(self, photo_id):
+        return self.__http_client.delete(url=config.PHOTO_BY_ID.format(photo_id),
+                                         params=self.token)
+
+        # _________________________________________ COMMENTS API CALLS SECTION __________________________________________
+
+    def get_all_comments(self):
+        resp = self.__http_client.get(url=config.COMMENTS,
+                                      params=self.token)
+        return [self.__generate_comments(item) for item in resp['result']]
+
+    def create_new_comment(self, comment_data):
+        return self.__http_client.post(url=config.COMMENTS, data=comment_data.to_dict(),
+                                       params=self.token)
+        # _____________________________________________________________________________________________________________________________
+
+    def get_comment_by_id(self, comment_id):
+        resp = self.__http_client.get(url=config.COMMENT_BY_ID.format(comment_id), params=self.token)
+        return self.__generate_user(resp['result'])
+
+        # _____________________________________________________________________________________________________________________________
+
+    def update_comment(self, comment_id, comment_data):
+        return self.__http_client.post(url=config.COMMENT_BY_ID.format(comment_id), data=comment_data.to_dict(),
+                                       params=self.token)
+        # _____________________________________________________________________________________________________________________________
+
+    def delete_comment(self, comment_id):
+        return self.__http_client.delete(url=config.COMMENT_BY_ID.format(comment_id),
                                          params=self.token)
